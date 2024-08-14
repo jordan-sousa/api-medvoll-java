@@ -17,12 +17,6 @@ public class TratadorDeErros {
         return ResponseEntity.notFound().build();
     }
 
-//    @ExceptionHandler(MethodArgumentNotValidException.class)
-//    public ResponseEntity tratarErro400(MethodArgumentNotValidException exception) {
-//        var erros =  exception.getFieldError();
-//
-//        return ResponseEntity.badRequest().body(erros.wrap().map(DadosErroValidacao::new).toList());
-//    }
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<List<DadosErroValidacao>> tratarErro400(MethodArgumentNotValidException exception) {
         var erros = exception.getFieldErrors();
@@ -30,7 +24,7 @@ public class TratadorDeErros {
                 .map(DadosErroValidacao::new)
                 .toList();
 
-        return ResponseEntity.badRequest().body(errosValidacao);  // Retorna a lista de erros
+        return ResponseEntity.badRequest().body(errosValidacao);
     }
 
 
